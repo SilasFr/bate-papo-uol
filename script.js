@@ -3,6 +3,18 @@ let userName = undefined
 let actualMsg = undefined
 let feed = undefined
 
+// let textoMsg = document.querySelector('.text-input')
+    
+// textoMsg.addEventListener("keyup", function(event) {
+//     // Number 13 is the "Enter" key on the keyboard
+//     if (event.keyCode === 13) {
+//         // Cancel the default action, if needed
+//         event.preventDefault();
+//         // Trigger the button element with a click
+//         document.getElementById("myBtn").click();
+//     }
+//     });
+
 function entrarNaSala(){
     userName = prompt('Digite seu nome')
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', {name:userName})
@@ -80,6 +92,7 @@ function enviarMsg(){
         )
         textoMsg.value = ''
     promise.catch(alertaDesconectado)
+
 }
 
 function status400(){
@@ -103,6 +116,24 @@ function statusResposta(resposta){
     clearInterval(statusOnline)
     statusOnline = setInterval(statusUsuario, 5000)
     console.log(resposta)
+}
+
+function clickpress(event){
+    let textoMsg = document.querySelector('.text-input')
+    
+    textoMsg.addEventListener("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+          // Cancel the default action, if needed
+          event.preventDefault();
+          // Trigger the button element with a click
+          document.querySelector(".enviar").click();
+        }
+      });
+
+    if(event.keycode == 13){
+        enviarMsg()
+    }
 }
 
 entrarNaSala()
