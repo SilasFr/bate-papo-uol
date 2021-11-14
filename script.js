@@ -2,19 +2,19 @@ let statusOnline = undefined
 let userName = undefined
 let actualMsg = undefined
 let feed = undefined
-
+entrarNaSala()
 function entrarNaSala(){
     userName = prompt('Digite seu nome')
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', {name:userName})
     promise.then(carregarMsg)
     promise.catch(status400)
-    statusUsuario()
+    setTimeout(statusUsuario, 5000)
 }
 
 function carregarMsg(){
     let promise = axios.get('https://mock-api.driven.com.br/api/v4/uol/messages')
     promise.then(addMsg)
-    promise.catch(alertaDesconectado)
+    // promise.catch(alertaDesconectado)
 }
 
 function addMsg(resposta){
@@ -80,7 +80,7 @@ function enviarMsg(){
         )
         textoMsg.value = ''
 
-    promise.catch(alertaDesconectado)
+    // promise.catch(alertaDesconectado)
 
 }
 
@@ -117,5 +117,3 @@ textoMsg.addEventListener("keyup", function(event) {
         document.querySelector(".enviar").click();
     }
     })
-
-entrarNaSala()
