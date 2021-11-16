@@ -165,8 +165,6 @@ footer ::placeholder {
     font-weight: 400;
     line-height: 25px;
     text-align: center;
-
-
 }
 
 .info-usuario button{
@@ -184,7 +182,6 @@ footer ::placeholder {
     line-height: 25px;
     letter-spacing: 0em;
     text-align: center;
-
 }
 
 .info-usuario .loading-img{
@@ -198,4 +195,104 @@ footer ::placeholder {
 
 .hidden{
     display: none;
+}
+
+.participants{
+    height: 100%;
+    width: 70%;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    transition: all 0.5s ease-in-out;
+}
+
+.titulo-contato{
+    height: 80px;
+    padding: 40px;
+    margin-bottom: 5px;
+
+}
+
+.titulo-contato p{
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.participants-online{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.participant-li{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+
+    padding: 10px;
+}
+
+.participant-li ion-icon{
+    font-size: 26px;
+}
+
+.titulo-visibility{
+    height: 80px;
+    padding: 40px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+}
+
+.visibility-li{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+
+    padding: 10px;
+}
+
+.visibility-li ion-icon{
+    font-size: 24px;
+}
+
+.checkmark{
+    color: green;
+    font-size: 15px;
+    --ionicon-stroke-width: 120px;
+    margin-left: 20px;
+    display: none;
+}
+
+.checkmark.selected{
+    display: flex;
+}
+
+.close{
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close img{
+    width: 40px;
+}
+
+.opacity{
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.843);
 }
