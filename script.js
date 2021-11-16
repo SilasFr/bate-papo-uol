@@ -151,7 +151,7 @@ function enviarMsg(){
         let ulParticipants = document.querySelector('.participants-online')
         ulParticipants.innerHTML = 
         `
-        <div class="participant-li" onclick="selectUser(this)">
+        <div class="participant-li" onclick="selectUser(this)" data-identifier="participant">
         <ion-icon name="people"></ion-icon>
         <p>Todos</p>
         <ion-icon name="checkmark" class="checkmark selected"></ion-icon>
@@ -162,7 +162,7 @@ function enviarMsg(){
 
         ulParticipants.innerHTML += 
         `
-            <div class="participant-li" onclick="selectUser(this)">
+            <div class="participant-li" onclick="selectUser(this)" data-identifier="participant">
                 <ion-icon name="person"></ion-icon>
                 <p>${liParticipants.name}</p>
                 <ion-icon name="checkmark" class="checkmark hidden"></ion-icon>
