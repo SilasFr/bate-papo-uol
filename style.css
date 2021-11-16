@@ -3,9 +3,8 @@
 }
 
 body{
-    /* margin: 0 auto; */
     margin-top: 100px;
-    padding-bottom: 90px;
+    padding-bottom: 85px;
     background-color: #E5E5E5;
     font-family: Roboto;
 }
@@ -56,7 +55,7 @@ main{
     background-color: #fff;
 }
 
-.mensagem.reservada{
+.mensagem.private_message{
     background-color: #FFDEDE;
 }
 
@@ -80,8 +79,9 @@ main{
 
 footer{
     position: fixed;
+    z-index: 1;
     bottom: 0px;
-
+    
     width: 100%;
     height: 80px;
     display: flex;
@@ -101,9 +101,101 @@ footer .input input {
     width: 100%;
     height:50px;
     margin-left:5px ;
+    border: none;
+    outline: none;
 }
 
 footer .enviar ion-icon{
     font-size: 26px;
     margin-right: 20px;
+}
+
+footer ::-webkit-input-placeholder { 
+    color: black;
+    font-style: italic;
+  }
+  
+footer :-ms-input-placeholder { 
+    color: black;
+    font-style: italic;
+}
+  
+footer ::placeholder {
+    color: black;
+    font-style: italic;
+}
+
+.tela-de-entrada{
+    width: 100%;
+    height:100%;
+    
+    background-color: white;
+    
+    position: fixed;
+    z-index: 3;
+    top: 0px;
+    left: 0;
+}
+
+.logo-entrada{
+    margin: 90px auto 70px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.info-usuario{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0 300px 0;
+}
+
+.info-usuario input{
+    width: 60%;
+    height: 55px;
+    border: 1px solid #D7D7D7;
+    /* border-color: #AEAEAE; */
+    border-radius: 5px;
+    text-align: center;
+
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 25px;
+    text-align: center;
+
+
+}
+
+.info-usuario button{
+    width: 110px;
+    height: 55px;
+    border-radius: 5px;
+    color: #696969;
+    border: none;
+    background-color: #E7E7E7;
+
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 0em;
+    text-align: center;
+
+}
+
+.info-usuario .loading-img{
+    background-color: #fff;
+    width: 100px;
+}
+
+.info-usuario .entrando{
+    font-weight: bold;
+}
+
+.hidden{
+    display: none;
 }

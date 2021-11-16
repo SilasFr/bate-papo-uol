@@ -2,16 +2,30 @@ let statusOnline = undefined
 let userName = undefined
 let actualMsg = undefined
 let feed = undefined
-entrarNaSala()
+let count =0 
+const telaDeEntrada = document.querySelector('.tela-de-entrada')
+telaDeEntrada.classList.remove('hidden')
+
 function entrarNaSala(){
-    userName = prompt('Digite seu nome')
+    const inputNome = document.querySelector('.input-usuario')
+    userName = inputNome.value
+    const loadingScreen = document.querySelector('.info-usuario')
+    loadingScreen.innerHTML = `
+    <img class="loading-img" src="./img/loading.gif" alt="Carregando">
+    <p class="entrando">Entrando...</p>`
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', {name:userName})
     promise.then(carregarMsg)
     promise.catch(status400)
     setTimeout(statusUsuario, 5000)
 }
 
+function status400(){
+    alert("Já existe um usuário online com esse nome, digite outro nome")
+    entrarNaSala()
+}
+
 function carregarMsg(){
+    telaDeEntrada.classList.add('hidden')
     let promise = axios.get('https://mock-api.driven.com.br/api/v4/uol/messages')
     promise.then(addMsg)
     // promise.catch(alertaDesconectado)
@@ -20,9 +34,11 @@ function carregarMsg(){
 function addMsg(resposta){
     let liMsg = document.querySelector('.ulMensagens')
     console.log(resposta)
-    if(resposta.data!==actualMsg){
 
+    if(resposta.data!==actualMsg || count === 0){
         actualMsg = resposta.data
+
+        count = 1
         liMsg.innerHTML = ''
     
         for(let i=0; i<actualMsg.length; i++){
@@ -48,7 +64,7 @@ function addMsg(resposta){
                         </p>
                     </li>`
     
-            }else if(msg.type==="private_message"){
+            }else if(msg.type==="private_message" && (userName===msg.to || userName===msg.from)){
                 liMsg.innerHTML += `
                     <li class="mensagem ${msg.type}" data-identifier="message">
                         <p>
@@ -79,15 +95,17 @@ function enviarMsg(){
         }        
         )
         textoMsg.value = ''
-
-    // promise.catch(alertaDesconectado)
-
 }
 
-function status400(){
-    alert("Já existe um usuário online com esse nome, digite outro nome")
-    entrarNaSala()
-}
+let textoMsg = document.querySelector('.text-input')    
+textoMsg.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        // Trigger the button element with a click
+        document.querySelector(".enviar").click();
+    }
+    })
+
 
 function statusUsuario(){
     const promise = axios.post('https://mock-api.driven.com.br/api/v4/uol/status', {name: `${userName}`})
@@ -106,14 +124,3 @@ function statusResposta(resposta){
     statusOnline = setInterval(statusUsuario, 5000)
     console.log(resposta)
 }
-let textoMsg = document.querySelector('.text-input')
-    
-textoMsg.addEventListener("keyup", function(event) {
-    // Number 13 is the "Enter" key on the keyboard
-    if (event.keyCode === 13) {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Trigger the button element with a click
-        document.querySelector(".enviar").click();
-    }
-    })
