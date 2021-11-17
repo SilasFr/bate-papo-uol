@@ -13,8 +13,8 @@ requestParticipants()
 function asideParticipants(){
     participantsAside.classList.remove('hidden')
     opacity.classList.remove('hidden')
-
 }
+
 function closeParticipants(){
     participantsAside.classList.add('hidden')
     opacity.classList.add('hidden')
@@ -47,7 +47,6 @@ function carregarMsg(){
 
 function addMsg(resposta){
     let liMsg = document.querySelector('.ulMensagens')
-    console.log(resposta)
     
     if(resposta.data!==actualMsg || count === 0){
         actualMsg = resposta.data
@@ -98,14 +97,13 @@ function addMsg(resposta){
 
 function enviarMsg(){
     let textoMsg = document.querySelector('.text-input')
-    console.dir(textoMsg)
     const promise = axios.post(
         'https://mock-api.driven.com.br/api/v4/uol/messages', 
         {
             from: `${userName}`,
             to: "Todos",
             text: textoMsg.value,
-            type: "message" // ou "private_message" para o bônus
+            type: "message" 
         }        
         )
         textoMsg.value = ''
@@ -116,6 +114,8 @@ function enviarMsg(){
         if (event.keyCode === 13) {
             event.preventDefault();
             document.querySelector(".enviar").click();
+
+
         }
     })
     
@@ -135,27 +135,24 @@ function enviarMsg(){
     function statusResposta(resposta){
         clearInterval(statusOnline)
         statusOnline = setInterval(statusUsuario, 5000)
-        console.log(resposta)
     }
     
     function requestParticipants(){
         let participants = axios.get('https://mock-api.driven.com.br/api/v4/uol/participants')
         participants.then(carregarParticipants)
-        participants.catch(status400)
-    
+        participants.catch(status400)    
     }
 
     function carregarParticipants(resposta){
-        console.log(resposta)
         let participantsOnline = resposta.data
         let ulParticipants = document.querySelector('.participants-online')
         ulParticipants.innerHTML = 
         `
         <div class="participant-li" onclick="selectUser(this)" data-identifier="participant">
-        <ion-icon name="people"></ion-icon>
-        <p>Todos</p>
-        <ion-icon name="checkmark" class="checkmark selected"></ion-icon>
-    </div>
+            <ion-icon name="people"></ion-icon>
+            <p>Todos</p>
+            <ion-icon name="checkmark" class="checkmark selected"></ion-icon>
+        </div>
     `
     for(let i =0; i<participantsOnline.length; i++){
         let liParticipants = participantsOnline[i]
@@ -169,15 +166,12 @@ function enviarMsg(){
             </div>
         `
     }
-
     clearInterval(loopParticipants)
     loopParticipants = setInterval(requestParticipants, 10000)
-
 }
 
 function selectUser(participantSelected){
     let checkmark = participantSelected.querySelector('.checkmark')
-    console.log(participantSelected)
 
     let ulContato = document.querySelectorAll('.participant-li')
     
@@ -190,20 +184,5 @@ function selectUser(participantSelected){
     }    
 }
 
-function selectVisibility(visibilitySelected){
-    let checkmark = visibilitySelected.querySelector('.checkmark')
-
-    let ulVisibility = document.querySelectorAll('.visibility')
-    
-    for(let i =0; i<ulContato.length;i++){
-        let x = ulContato[i].lastElementChild.classList.contains('selected')
-        if( x && (ulContato[i].lastChild!==checkmark) ){
-            ulContato[i].lastElementChild.classList.toggle('selected')
-            checkmark.classList.toggle('selected')
-
-        }        
-    }
-    
-}
 
 
